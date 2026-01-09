@@ -13,93 +13,45 @@ No real capital is used.
 ✨ Key Features
 
 Live market data ingestion using yfinance
-
 Factor-based signal generation (momentum strategy)
-
 Automatic portfolio rebalancing
-
 Position and cash management
-
 Persistent portfolio state (JSON)
-
 Performance tracking (PnL, equity curve)
-
 Logging for full traceability
-
 Jupyter & script-compatible execution
 
-🧠 Strategy Logic (High Level)
-Factor Used
+🚀 What This Project Does
 
-3-Month Momentum
+Fetches live and historical stock market data
+Applies a momentum-based trading strategy
+Automatically rebalances the portfolio
+Simulates buy/sell trades (paper trading)
+Tracks portfolio value and returns
+Saves portfolio state and trade history
 
-Stocks are ranked by past returns
-
-Position Rules
-
-Top 20% → Long positions
-
-Bottom 20% → Short positions
-
-Neutral stocks → No position
-
-Rebalancing
-
-Configurable frequency:
-
-Daily
-
-Weekly
-
-Monthly
-
-🏗️ System Architecture
-├── LiveDataManager
-│   ├── Fetches live prices
-│   └── Fetches historical data
-│
-├── Strategy Engine
-│   ├── Calculates factor signals
-│   └── Determines target weights
-│
-├── Portfolio Manager
-│   ├── Tracks cash & positions
-│   ├── Executes simulated trades
-│   └── Stores trade history
-│
-├── Execution Layer
-│   └── Paper trade simulation
-│
-├── Monitoring
-│   ├── Logs
-│   └── Performance metrics
+🏗️ How the System Is Structured
+Data → Strategy → Portfolio → Trades → Performance
 
 📂 Project Structure
-.
-├── trading_system.ipynb      # Main Jupyter notebook
-├── trading.log               # Runtime logs
-├── portfolio_state.json      # Saved portfolio state
-├── README.md                 # Project documentation
-└── requirements.txt          # Dependencies
 
-🔧 Tech Stack
+├── trading_system.ipynb     # Main notebook
+├── trading.log              # Runtime logs
+├── portfolio_state.json     # Saved portfolio data
+├── README.md                # Project documentation
+└── requirements.txt         # Dependencies
 
-Python 3.8+
+🛠️ Tech Stack
+1. Python 3.8+
+2. pandas
+3. numpy
+4. yfinance
+5. matplotlib
+6. schedule
+7. logging
 
-pandas
+1️⃣ Create the Trading Engine
 
-numpy
-
-yfinance
-
-matplotlib
-
-schedule
-
-logging
-
-▶️ Example Usage
-Initialize the Trading Engine
 tickers = [
     'AAPL', 'MSFT', 'GOOGL', 'AMZN',
     'META', 'TSLA', 'NVDA', 'JPM'
@@ -111,102 +63,49 @@ engine = LiveStrategyEngine(
     rebalance_frequency='monthly'
 )
 
-Run a Single Trading Cycle (Jupyter Safe)
+2️⃣ Run a Trading Cycle
+
 engine.run_trading_cycle()
+This will Fetch latest prices, Calculate signals, Rebalance the portfolio (if needed), Log trades and portfolio value
 
+3️⃣ View Performance
 
-This will:
-
-Fetch latest prices
-
-Evaluate rebalancing conditions
-
-Generate signals
-
-Execute simulated trades
-
-Save portfolio state
-
-Visualize Portfolio Performance
 plot_equity_curve(engine.portfolio)
-
-Calculate Performance Metrics
 calculate_performance_metrics(engine.portfolio)
 
+📊 Example Log Output
 
-Outputs:
-
-Total Return
-
-CAGR
-
-Sharpe Ratio
-
-Maximum Drawdown
-
-📊 Sample Output (Logs)
 RUNNING TRADING CYCLE
-Portfolio Value: $101,245.30 (PnL: +1.24%)
+Portfolio Value: $101,230.45 (PnL: +1.23%)
 Rebalancing portfolio...
-BUY 15 shares of AAPL @ $189.45
-SELL 10 shares of TSLA @ $243.20
+BUY 20 shares of AAPL @ $187.60
+SELL 15 shares of TSLA @ $245.10
 Portfolio state saved
-
-📈 Performance Metrics Explained
-Metric	Description
-Total Return	Net portfolio gain
-CAGR	Annualized return
-Sharpe Ratio	Risk-adjusted return
-Max Drawdown	Worst peak-to-trough loss
-⚠️ Assumptions & Limitations
-
-No transaction costs or slippage
-
-Yahoo Finance data latency
-
-No corporate action adjustments in real-time
-
-Short selling simulated without margin constraints
-
-Market hours depend on exchange timezone
 
 🔮 Future Enhancements
 
 Machine Learning–based signal generation
-
 Risk parity or volatility targeting
-
 Transaction cost modeling
-
 Broker API integration (Zerodha, Alpaca)
-
 Web dashboard (Streamlit)
-
 Multi-asset support (ETFs, crypto)
 
 📚 Academic Relevance
 
 This project demonstrates:
-
 Algorithmic trading system design
-
 Financial data engineering
-
 Portfolio optimization principles
-
 Risk-adjusted performance analysis
 
 Software architecture for quantitative systems
-
 Suitable for:
 
 Final-year projects
-
 Quant research portfolios
-
 FinTech / trading interviews
 
 📜 Disclaimer
-
 This software is provided as-is for learning and research.
 The author is not responsible for any financial losses arising from the use of this code.
